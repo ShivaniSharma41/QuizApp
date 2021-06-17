@@ -56,15 +56,15 @@ const loadQuestion = () => {
   option4.innerText = questionList.d;
 }
 
-
 loadQuestion();
-//button.disabled = true;
 
 const getCheckAnswer = () => {
-  //button.disabled = false;
   let answer;
+  
   answers.forEach((curAnsElem) => {
+    
     if (curAnsElem.checked) {
+      
       answer = curAnsElem.id;
     }
 
@@ -78,32 +78,40 @@ const deselectAll = () => {
 }
 
 submit.addEventListener('click', () => {
+ 
   const checkedAnswer = getCheckAnswer();
-  console.log(checkedAnswer);
+  if(checkedAnswer == undefined)
+    alert("You Must Choose One Option.");
+  else
+  {
+    
+    console.log(checkedAnswer);
 
-  if (checkedAnswer == quizDB[questionCount].ans) {
-    score++;
-  };
-  questionCount++;
-  deselectAll();
-  if (questionCount < quizDB.length) {
-    loadQuestion();
-  }
-  else {
-    question.style.display = "none";
-    // option1.style.display = "none"
-    // option2.style.display = "none"
-    // option3.style.display = "none"
-    // option4.style.display = "none"
-    questionWrapper.style.display = "none";
-    submit.style.display = "none";
-    showScore.innerHTML = `
+    if (checkedAnswer == quizDB[questionCount].ans) {
+      score++;
+    };
+    questionCount++;
+    deselectAll();
+    if (questionCount < quizDB.length) {
+      loadQuestion();
+    }
+    else {
+      question.style.display = "none";
+      // option1.style.display = "none"
+      // option2.style.display = "none"
+      // option3.style.display = "none"
+      // option4.style.display = "none"
+      questionWrapper.style.display = "none";
+      submit.style.display = "none";
+      showScore.innerHTML = `
     <h3>You Scored ${score}/ ${quizDB.length} </h3>
     <button class = "btn" onclick = "location.reload()">Play Again</button>
     `;
-    showScore.classList.remove('scoreArea');
+      showScore.classList.remove('scoreArea');
 
 
 
+    }
   }
+ 
 });
